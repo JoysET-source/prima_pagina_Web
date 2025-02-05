@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!--questo serve per commentare in css come ****** in python e come /**/ in JavaScript , per commentare solo una riga in css uguale
+    in python # in JavaScript //-->    
+    <title>Se Poate De Mancat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="30">
+    <meta name="keywords" content="kitchen, food, cake, sweety">
+    <meta name="description" content="here we made, learn and taste good and healthy food"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <style>
+        body{        
+        background-image: url(static/italian-cuisine.jpg);
+        background-repeat: repeat-x;
+        background-size: cover;
+        background-position: center;          
+        margin: 0;
+        font-family: Arial, sans-serif;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-container{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .logo{
+            margin-right: 0px;
+            margin-left: 10px;
+            height: 500px;
+            width: 560px;
+            border-radius: 280px;
+            opacity: 0.587;
+        }
+        .btn{
+            display: block;
+            font-size: large;
+            background-color: rgba(10, 13, 236, 0.4);
+            width:310px;
+            height:80px;
+            border-radius: 25px;
+            cursor:pointer;
+            border: none;
+            margin: 10px;            
+            }
+        .btn:hover{            
+            background-color:rgb(180, 109, 43,0.747);   
+            transition: 0.4s ease-in;
+            transform: scale(1.1,1.1);
+            box-shadow: 10px 20px 30px rgb(240, 236, 236) 
+            }   
+        .container1{
+            display: flex;
+            align-items: center;
+            justify-content: center;                                  
+            margin-top: 3.2%;
+            gap: 16px;                                   
+            }   
+        .social-media i{
+            font-size: 30px;
+            color: white;            
+            }        
+        .search-container{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            }
+        #search-input {
+            padding: 8px;
+            font-size: 8px;
+            width: 600px;            
+            }
+        #search-button {
+            padding: 8px 18px;
+            font-size: 10px;
+            margin-left: 4px;
+            border-radius: 20px;
+            background-color: white;  
+            color: black;     
+            cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="logo" src="static/logo_adesivo_SePoateDeMancat.jpg" alt="logo_Se_Poate_De_Mancat">
+        <div class="btn-container">
+            <button class="btn" id="runButton0">Esegui Script</button>
+            <button class="btn" id="runButton">Scrivi ricetta</button>        
+            <button class="btn" id="runButton1">Elenco Ricette</button>
+            <button class="btn" id="runButton2">Trova Rivetta</button>
+            <button class="btn" id="runButton3">Apporto Calorico</button>
+            <button class="btn">Modifica Ricetta</button>
+            <button class="btn">Elimina Ricetta</button>
+            <button class="btn">Esegui Script</button>
+            <button class="btn">Esegui Script</button>
+            <button class="btn">Esegui Script</button>            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("runButton0").onclick = function() {
+            fetch("/run_script")
+                .then(response => response.text())
+                .then(data => {const newWindow = window.open();
+                newWindow.document.write(data);
+                });
+        };
+    
+    
+        document.getElementById("runButton").onclick = function() {
+            const ricettaData = {
+                nome_ricetta: "Ravioli di zucca",  // Puoi cambiare questi valori con quelli che desideri inviare
+                ingredienti: "pasta fatta in casa, zucca, burro, salvia",
+                kcal: 400
+            };
+
+            fetch("/scrivi_ricetta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(ricettaData)  // Invia i dati in formato JSON
+                })
+                .then(response => response.json())  // Assicurati di parsare la risposta come JSON   
+                .then(data => {
+                    const newWindow = window.open();
+                    if (data.detail){
+                        newWindow.document.write(`<h1 style="text-align: center";>${data.detail}</h1>`);
+                    }
+                    else{
+                        newWindow.document.write(`
+                        <h1>${data.nome_ricetta}</h1>
+                        <p>Ingredienti: ${data.ingredienti}</p>
+                        <p>Calorie: ${data.kcal}</p>`);
+                    }
+                    
+                    newWindow.document.close();
+                })               
+                .catch(error => console.error('Error:', error));    
+        };    
+        
+        document.getElementById("runButton1").onclick = function(){
+            fetch("/elenco_ricette") // Effettua la richiesta GET all'endpoint
+                .then(response => response.json())  // Parsifica la risposta JSON
+                .then(data => {
+            // Creiamo una nuova finestra per visualizzare i dati delle ricette
+                    const newWindow = window.open();
+                    data.forEach(ricetta => { // Loop su ogni ricetta
+                    newWindow.document.write(`
+                    <h1>${ricetta.nome_ricetta}</h1>
+                    <p>Ingredienti: ${ricetta.ingredienti}</p>
+                    <p>Calorie: ${ricetta.kcal}</p>
+                `);
+            });
+            newWindow.document.close();
+            })
+                .catch(error => console.error('Errore:', error)); // Gestione degli errori
+            };
+
+        document.getElementById("runButton2").onclick = function(){
+            fetch("/trova_ricetta")
+                .then(response => response.json())
+                .then(data => {
+                    const newWindow = window.open();
+                    newWindow.document.write(`
+                    <h1>${data.nome_ricetta}</h1>
+                    <p>${data.ingredienti}</p>
+                    <p>${data.kcal}</p>
+                    `);
+                    newWindow.document.close();
+                })                
+                .catch(error => console.error("Errore:", error));
+            }; 
+
+        document.getElementById('search-button').onclick = function(){
+            const nomeRicetta = document.getElementById('search-input').text;
+            if (nomeRicetta){
+                fetch('/trova_ricetta')
+                .then(response => response.text())
+                .then(data => {
+                    const newWindow = window.open();
+                    newWindow.document.write(`
+                    <h2>${data.nome_ricetta}</h2>
+                    <p>${data.ingredienti}</p>
+                    <p>${data.kcal}</p>
+                    `);
+                    newWindow.document.close();
+                })
+            }else{
+                alert('Ricetta non trovata');
+            }
+        }
+            
+            
+        
+                  
+
+    </script>
+    <div class="container1">
+        <div class="social-media">
+            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    
+
+        <div class="search-container">
+            <label for="search-input" class="sr-only">Cerca ricetta</label>
+            <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca ricetta"/>
+            <button id="search-button" type="button">Cerca</button>
+            <!--<script src="script.js"></script>-->            
+        </div>        
+    </div>
+</body>
+</html>
+
+
+
