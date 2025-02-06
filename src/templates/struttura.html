@@ -39,7 +39,7 @@
         }
         .btn{
             display: block;
-            font-size: large;
+            font-size: x-large;
             background-color: rgba(10, 13, 236, 0.4);
             width:310px;
             height:80px;
@@ -49,7 +49,7 @@
             margin: 10px;            
             }
         .btn:hover{            
-            background-color:rgb(180, 109, 43,0.747);   
+            background-color:rgb(180, 109, 43, 0.887);   
             transition: 0.4s ease-in;
             transform: scale(1.1,1.1);
             box-shadow: 10px 20px 30px rgb(240, 236, 236) 
@@ -95,15 +95,15 @@
         <img class="logo" src="static/logo_adesivo_SePoateDeMancat.jpg" alt="logo_Se_Poate_De_Mancat">
         <div class="btn-container">
             <button class="btn" id="runButton0">Esegui Script</button>
-            <button class="btn" id="runButton">Scrivi ricetta</button>        
+            <button class="btn" id="runButton">Aggiungi la tua ricetta</button>        
             <button class="btn" id="runButton1">Elenco Ricette</button>
             <button class="btn" id="runButton2">Trova Rivetta</button>
             <button class="btn" id="runButton3">Apporto Calorico</button>
             <button class="btn">Modifica Ricetta</button>
             <button class="btn">Elimina Ricetta</button>
-            <button class="btn">Esegui Script</button>
-            <button class="btn">Esegui Script</button>
-            <button class="btn">Esegui Script</button>            
+            <button class="btn" onclick="location.href='/categoria/primi'">Primi Piatti</button>
+            <button class="btn" onclick="location.href='/categoria/pasta'">Paste</button>
+            <button class="btn" onclick="location.href='/categoria/secondi'">Secondi Piatti</button>          
         </div>
     </div>
     <div class="container1">
@@ -184,19 +184,27 @@
             };
 
         document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
-            const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input
+            const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input            
+            if (!cercaRicetta){
+                alert("inserisci una ricetta")
+            }
+            else{
             fetch("/trova_ricetta?nome_ricetta=" + cercaRicetta) // passa il valore come parametro nella richiesta a python
-                .then(response => response.json())
+                .then(response => response.json())                
                 .then(data => {
-                    const newWindow = window.open();
-                    newWindow.document.write(`
-                    <h1>${data.nome_ricetta}</h1>
-                    <p>${data.ingredienti}</p>
-                    <p>${data.kcal}</p>
-                    `);
-                    newWindow.document.close();
-                })                
-                .catch(error => console.error("Errore:", error));
+                    if (data.detail){
+                        alert(`${data.detail}`)
+                    }else{
+                        const newWindow = window.open();
+                        newWindow.document.write(`                        
+                        <h1>${data.nome_ricetta}</h1>
+                        <p>${data.ingredienti}</p>
+                        <p>${data.kcal}</p>
+                        `)};
+                        newWindow.document.close();
+                    })                
+                .catch(error => console.error("Errore:", error))};
+                document.getElementById("search-input").value = ""; //refresh alla barra di ricerca 
             };       
     </script>    
 </body>

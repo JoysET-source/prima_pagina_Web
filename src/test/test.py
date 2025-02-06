@@ -56,3 +56,91 @@
 #
 # if __name__ == '__main__':
 #     app.run(debug=True)
+# ======================================================================================================================
+# ======================================================================================================================
+# front end
+
+# document.getElementById("runButton").onclick = function()
+# {
+#     const
+# ricettaData = {
+#                   nome_ricetta: "Ravioli di zucca", // Puoi
+# cambiare
+# questi
+# valori
+# con
+# quelli
+# che
+# desideri
+# inviare
+# ingredienti: "pasta fatta in casa, zucca, burro, salvia",
+# kcal: 400
+# };
+#
+# fetch("/scrivi_ricetta", {
+#     method: "POST",
+#     headers: {
+#         "Content-Type": "application/json"
+#     },
+#     body: JSON.stringify(ricettaData) // Invia i dati in formato JSON
+# })
+# .then(response= > response.json()) // Assicurati
+# di
+# parsare
+# la
+# risposta
+# come
+# JSON
+# .then(data= > {
+#     const
+# newWindow = window.open();
+# if (data.detail)
+# {
+#     newWindow.document.write(` < h1
+# style = "text-align: center"; > ${data.detail} < / h1 > `);
+# }
+# else {
+#     newWindow.document.write(`
+#                              < h1 >${data.nome_ricetta} < / h1 >
+#                                                             < p > Ingredienti: ${data.ingredienti} < / p >
+#                                                                                                        < p > Calorie: ${
+#                                                                                                                            data.kcal} < / p > `);
+# }
+#
+# newWindow.document.close();
+# })
+# .catch(error= > console.error('Error:', error));
+# };
+# ===================== col suo backend============
+# Definizione della route per la creazione di una ricetta
+# @app.route("/scrivi_ricetta", methods=["POST"])
+# def scrivi_ricetta():
+#     data = request.get_json()  # Ottieni i dati inviati nella richiesta
+#     nome_ricetta = data.get('nome_ricetta')
+#     ingredienti = data.get('ingredienti')
+#     kcal = data.get('kcal')
+#
+#     # Verifica se la ricetta esiste già nel database
+#     existing_ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+#     if existing_ricetta:
+#         return jsonify({"detail" : "Ricetta gia caricata"}), 400
+#
+#     # Crea una nuova ricetta
+#     new_ricetta = Ricetta(
+#         nome_ricetta=nome_ricetta,
+#         ingredienti=ingredienti,
+#         kcal=kcal
+#     )
+#     try:
+#         db.session.add(new_ricetta)
+#         db.session.commit()
+#         return jsonify({
+#             'nome_ricetta': new_ricetta.nome_ricetta,
+#             'ingredienti': new_ricetta.ingredienti,
+#             'kcal': new_ricetta.kcal
+#             })
+#     except IntegrityError:
+#         db.session.rollback()
+#         return jsonify({"detail": "Errore durante il salvataggio della ricetta"}), 500
+# ======================================================================================================================
+# ======================================================================================================================

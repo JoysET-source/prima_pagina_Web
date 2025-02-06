@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Ricette - {{ categoria }}</title>
+        <meta charset="UTF-8>"
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Ricette della categoria: {{ categoria }}</h1>
+        <div>
+            {% for rocetta in db_Ricette %}
+            <div>
+                <img src="{{ url_for('static', filename='db_Ricette/ + categoria + '/' + ricetta['image']') }}" 
+                alt="Ricetta" width="200">
+                <p>{{ ricetta['description']}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <a href="/">Torna alla pagina principale</a>
+    </body>
+</html>
