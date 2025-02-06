@@ -58,7 +58,7 @@ def elenco_ricette():
 
 @app.route("/trova_ricetta", methods=["GET"])
 def trova_ricetta():
-    nome_ricetta = request.args.get("nome_ricetta")
+    nome_ricetta = request.args.get("nome_ricetta") # Ottieni il valore del parametro nome_ricetta da JS
     if nome_ricetta is None or nome_ricetta.strip() == "":
         return jsonify({"detail": "Ricetta non caricata"}), 400
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()

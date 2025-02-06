@@ -102,13 +102,29 @@
             <button class="btn">Esegui Script</button>            
         </div>
     </div>
+    <div class="container1">
+        <div class="social-media">
+            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    
 
+        <div class="search-container">
+            <label for="search-input" class="sr-only">Cerca ricetta</label>
+            <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
+            <button id="search-button" type="button">Cerca</button>                        
+        </div>        
+    </div>
     <script>
-        document.getElementById("runButton0").onclick = function() {
+            
+            document.getElementById("runButton0").onclick = function() {
             fetch("/run_script")
                 .then(response => response.text())
-                .then(data => {const newWindow = window.open();
-                newWindow.document.write(data);
+                .then(data => {alert("si giusto")
                 });
         };
     
@@ -163,8 +179,9 @@
                 .catch(error => console.error('Errore:', error)); // Gestione degli errori
             };
 
-        document.getElementById("runButton2").onclick = function(){
-            fetch("/trova_ricetta")
+        document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
+            const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input
+            fetch("/trova_ricetta?nome_ricetta=" + cercaRicetta) // passa il valore come parametro nella richiesta a python
                 .then(response => response.json())
                 .then(data => {
                     const newWindow = window.open();
@@ -176,50 +193,8 @@
                     newWindow.document.close();
                 })                
                 .catch(error => console.error("Errore:", error));
-            }; 
-
-        document.getElementById('search-button').onclick = function(){
-            const nomeRicetta = document.getElementById('search-input').text;
-            if (nomeRicetta){
-                fetch('/trova_ricetta')
-                .then(response => response.text())
-                .then(data => {
-                    const newWindow = window.open();
-                    newWindow.document.write(`
-                    <h2>${data.nome_ricetta}</h2>
-                    <p>${data.ingredienti}</p>
-                    <p>${data.kcal}</p>
-                    `);
-                    newWindow.document.close();
-                })
-            }else{
-                alert('Ricetta non trovata');
-            }
-        }
-            
-            
-        
-                  
-
-    </script>
-    <div class="container1">
-        <div class="social-media">
-            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
-                <i class="fab fa-facebook"></i>
-            </a>
-        </div>
-    
-
-        <div class="search-container">
-            <label for="search-input" class="sr-only">Cerca ricetta</label>
-            <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca ricetta"/>
-            <button id="search-button" type="button">Cerca</button>
-            <!--<script src="script.js"></script>-->            
-        </div>        
-    </div>
+            };       
+    </script>    
 </body>
 </html>
 
