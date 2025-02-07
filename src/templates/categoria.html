@@ -6,13 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Ricette della categoria: {{ categoria }}</h1>
+        <div class="paste">Ricette della categoria: {{ categoria }}</div>
         <div>
-            {% for rocetta in db_Ricette %}
-            <div>
-                <img src="{{ url_for('static', filename='db_Ricette/ + categoria + '/' + ricetta['image']') }}" 
-                alt="Ricetta" width="200">
-                <p>{{ ricetta['description']}}</p>
+            {% for ricetta in ricette %}
+            <div>                
+                <!--<img src="{{ url_for('static', filename='db_Ricette/' + categoria + '/' + ricetta['image']) }}">-->
+                <!--<img src="{{ url_for('static', filename=ricetta['image'][len('static/'):] ) }}">-->
+                <img src="{{ url_for('static', filename=ricetta['image']) }}" alt="Ricetta" width="200">                
+                <p>{{ ricetta['description'] }}</p>
             </div>
             {% endfor %}
         </div>
