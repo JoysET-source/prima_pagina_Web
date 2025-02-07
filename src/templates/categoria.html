@@ -4,15 +4,36 @@
         <title>Ricette - {{ categoria }}</title>
         <meta charset="UTF-8>"
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+            background-image: url("{{ url_for('static', filename='sfondo_carbonara.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;            
+            }
+            .pasta{
+            color: tomato;
+            text-align: center;            
+            font-size: 200%;    
+            } 
+            .ricette-container{
+            margin: 20px;
+            text-align: center;
+            } 
+            
+        </style>
     </head>
     <body>
-        <div class="paste">Ricette della categoria: {{ categoria }}</div>
+        <div class="pasta">Ricette della categoria: {{ categoria }}</div>
         <div>
             {% for ricetta in ricette %}
-            <div>                
-                <!--<img src="{{ url_for('static', filename='db_Ricette/' + categoria + '/' + ricetta['image']) }}">-->
-                <!--<img src="{{ url_for('static', filename=ricetta['image'][len('static/'):] ) }}">-->
-                <img src="{{ url_for('static', filename=ricetta['image']) }}" alt="Ricetta" width="200">                
+            <div class="ricette-container">               
+                <img src="{{ url_for('static', filename=ricetta['image']) }}" 
+                alt="{{ ricetta['image'].split('/')[-1].replace('.jpg', '').replace('_', ' ') }}" width="200">             
                 <p>{{ ricetta['description'] }}</p>
             </div>
             {% endfor %}
