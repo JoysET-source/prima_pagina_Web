@@ -60,57 +60,38 @@
 # ======================================================================================================================
 # front end
 
-# document.getElementById("runButton").onclick = function()
-# {
-#     const
-# ricettaData = {
-#                   nome_ricetta: "Ravioli di zucca", // Puoi
-# cambiare
-# questi
-# valori
-# con
-# quelli
-# che
-# desideri
-# inviare
-# ingredienti: "pasta fatta in casa, zucca, burro, salvia",
-# kcal: 400
-# };
+# document.getElementById("runButton").onclick = function(){
+#     const ricettaData = {
+#                   nome_ricetta: "Ravioli di zucca", // Puoi cambiare questi valori con quelli che desideri inviare
+#                   ingredienti: "pasta fatta in casa, zucca, burro, salvia",
+#                   kcal: 400
+#                   };
 #
-# fetch("/scrivi_ricetta", {
+#     fetch("/scrivi_ricetta", {
 #     method: "POST",
-#     headers: {
-#         "Content-Type": "application/json"
-#     },
+#     headers: { "Content-Type": "application/json" },
 #     body: JSON.stringify(ricettaData) // Invia i dati in formato JSON
-# })
-# .then(response= > response.json()) // Assicurati
-# di
-# parsare
-# la
-# risposta
-# come
-# JSON
-# .then(data= > {
-#     const
-# newWindow = window.open();
-# if (data.detail)
-# {
+#     })
+#     .then(response= > response.json()) // Assicurati di parsare la risposta come JSON
+#     .then(data= > {
+#     const newWindow = window.open();
+#     if (data.detail)
+#     {
 #     newWindow.document.write(` < h1
-# style = "text-align: center"; > ${data.detail} < / h1 > `);
-# }
-# else {
+#     style = "text-align: center"; > ${data.detail} < / h1 > `);
+#     }
+#     else {
 #     newWindow.document.write(`
-#                              < h1 >${data.nome_ricetta} < / h1 >
-#                                                             < p > Ingredienti: ${data.ingredienti} < / p >
-#                                                                                                        < p > Calorie: ${
-#                                                                                                                            data.kcal} < / p > `);
-# }
+#          < h1 >${data.nome_ricetta} < / h1 >
+#          < p > Ingredienti: ${data.ingredienti} < / p >
+#          < p > Calorie: ${
+#                data.kcal} < / p > `);
+#                }
 #
-# newWindow.document.close();
-# })
-# .catch(error= > console.error('Error:', error));
-# };
+#     newWindow.document.close();
+#     })
+#     .catch(error= > console.error('Error:', error));
+#     };
 # ===================== col suo backend============
 # Definizione della route per la creazione di una ricetta
 # @app.route("/scrivi_ricetta", methods=["POST"])

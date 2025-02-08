@@ -10,8 +10,6 @@ def run_script():
     # print("Il pulsante è stato premuto!")
     return 'Script eseguito!'
 
-
-
 # Definizione della route per la creazione di una ricetta
 @app.route("/scrivi_ricetta", methods=["POST"])
 def scrivi_ricetta():
@@ -67,6 +65,18 @@ def trova_ricetta():
             "ingredienti": ricetta.ingredienti,
             "kcal": ricetta.kcal
             })
+
+@app.route("/elimina_ricetta", methods=["GET"])
+def elimina_ricetta():
+    nome_ricetta = request.args.get("nome_ricetta")
+    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+    if ricetta is None:
+        return jsonify({"detail": "La ricetta inserita non esiste"}), 404
+
+    db.session.delete(ricetta)
+    db.session.commit()
+    return jsonify({"messaggio":"ricetta cancellata"}), 200
+
 
 
 if __name__ == '__main__':

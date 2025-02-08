@@ -90,22 +90,32 @@
             color: black;     
             cursor: pointer;
             }
+        #elimina-button{
+            padding: 8px 18px;
+            font-size: 10px;            
+            border-radius: 20px;
+            background-color: white;  
+            color: black;     
+            cursor: pointer;
+            }
     </style>
 </head>
 <body>
     <div class="container">
         <img class="logo" src="static/logo_adesivo_SePoateDeMancat.jpg" alt="logo_Se_Poate_De_Mancat">
         <div class="btn-container">
-            <button class="btn" id="runButton0">Esegui Script</button>
-            <button class="btn" id="runButton">Aggiungi la tua ricetta</button>        
             <button class="btn" id="runButton1">Elenco Ricette</button>
-            <button class="btn" id="runButton2">Trova Rivetta</button>
-            <button class="btn" id="runButton3">Apporto Calorico</button>
-            <button class="btn">Modifica Ricetta</button>
-            <button class="btn">Elimina Ricetta</button>
+            <button class="btn" onclick="location.href='/categoria/entree'">Entree</button>
             <button class="btn" onclick="location.href='/categoria/primi'">Primi Piatti</button>
             <button class="btn" onclick="location.href='/categoria/pasta'">Paste</button>
-            <button class="btn" onclick="location.href='/categoria/secondi'">Secondi Piatti</button>          
+            <button class="btn" onclick="location.href='/categoria/risotti'">Risotti</button>
+            <button class="btn" onclick="location.href='/categoria/secondi'">Secondi Piatti</button>
+            <button class="btn" onclick="location.href='/categoria/streetFood'">Street Food</button>
+            <button class="btn" onclick="location.href='/categoria/pizza'">Pizza</button>
+            <button class="btn" id="runButton0">Esegui Script</button>
+            <button class="btn" id="runButton">Aggiungi la tua ricetta</button>           
+            <button class="btn" id="runButton3">Apporto Calorico</button>            
+            <button class="btn" id="runButton2">Elimina Ricetta</button>                    
         </div>
     </div>
     <div class="container1">
@@ -122,7 +132,8 @@
         <div class="search-container">
             <label for="search-input" class="sr-only">Cerca ricetta</label>
             <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
-            <button id="search-button" type="button">Cerca</button>                        
+            <button id="search-button" type="button">Cerca</button>
+            <button id="elimina-button" type="button">Elimina</button>                      
         </div>        
     </div>
     <script>
@@ -137,9 +148,9 @@
     
         document.getElementById("runButton").onclick = function() {
             const ricettaData = {
-                nome_ricetta: "Ravioli di zucca",  // Puoi cambiare questi valori con quelli che desideri inviare
+                nome_ricetta: "per test4",  // Puoi cambiare questi valori con quelli che desideri inviare
                 ingredienti: "pasta fatta in casa, zucca, burro, salvia",
-                kcal: 400
+                kcal: 230
             };
 
             fetch("/scrivi_ricetta", {
@@ -183,7 +194,7 @@
             newWindow.document.close();
             })
                 .catch(error => console.error('Errore:', error)); // Gestione degli errori
-            };
+        };
 
         document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
             const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input            
@@ -207,7 +218,22 @@
                     })                
                 .catch(error => console.error("Errore:", error))};
                 document.getElementById("search-input").value = ""; //refresh alla barra di ricerca 
-            };       
+        };   
+            
+        document.getElementById("elimina-button").onclick = function(){
+            const eliminaRicetta = document.getElementById("search-input").value;
+            fetch("/elimina_ricetta?nome_ricetta=" + eliminaRicetta)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.detail){
+                        alert(`${data.detail}`)
+                    }
+                    if (data.messaggio) {
+                        alert(`${data.messaggio}`)
+                    }                     
+                });
+                document.getElementById("search-input").value = "";
+        };
     </script>    
 </body>
 </html>
