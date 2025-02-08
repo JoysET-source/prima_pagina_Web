@@ -49,8 +49,6 @@ def elenco_ricette():
     for ricetta in elenco_ricette:
         elenco.append({
             "nome_ricetta": ricetta.nome_ricetta,
-            "ingredienti": ricetta.ingredienti,
-            "kcal": ricetta.kcal
         })
     return jsonify(elenco)
 

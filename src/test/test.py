@@ -125,3 +125,13 @@
 #         return jsonify({"detail": "Errore durante il salvataggio della ricetta"}), 500
 # ======================================================================================================================
 # ======================================================================================================================
+# ================ fare stili dinamici per ogni pagina aperta da ogni pulsante =========================================
+# backend
+# @app.route("/categoria/<categoria>")
+# def categoria(categoria):
+#     css_file = f"{categoria}.sfondi"  # File CSS per la categoria
+#     ricette = load_ricette(categoria)
+#     return render_template("categoria.html", categoria=categoria, ricette=ricette, css_file=css_file)
+#frontend
+# <link rel="stylesheet" href="{{ url_for('static', filename='sfondi/' + css_file) }}">
+# ======================================================================================================================

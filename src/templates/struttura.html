@@ -115,7 +115,7 @@
             <button class="btn" id="runButton0">Esegui Script</button>
             <button class="btn" id="runButton">Aggiungi la tua ricetta</button>           
             <button class="btn" id="runButton3">Apporto Calorico</button>            
-            <button class="btn" id="runButton2">Elimina Ricetta</button>                    
+            <button class="btn" id="runButton2">Vuoto</button>                    
         </div>
     </div>
     <div class="container1">
@@ -132,17 +132,16 @@
         <div class="search-container">
             <label for="search-input" class="sr-only">Cerca ricetta</label>
             <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
-            <button id="search-button" type="button">Cerca</button>
-            <button id="elimina-button" type="button">Elimina</button>                      
+            <button id="search-button" type="button">Search</button>
+            <button id="elimina-button" type="button">Delete</button>                      
         </div>        
     </div>
-    <script>
-            
-            document.getElementById("runButton0").onclick = function() {
+    <script>            
+        document.getElementById("runButton0").onclick = function() {
             fetch("/run_script")
-                .then(response => response.text())
-                .then(data => {alert("si giusto")
-                });
+            .then(response => response.text())
+            .then(data => {alert("si giusto")
+            });   
         };
     
     
@@ -186,9 +185,7 @@
                     const newWindow = window.open();
                     data.forEach(ricetta => { // Loop su ogni ricetta
                     newWindow.document.write(`
-                    <h1>${ricetta.nome_ricetta}</h1>
-                    <p>Ingredienti: ${ricetta.ingredienti}</p>
-                    <p>Calorie: ${ricetta.kcal}</p>
+                    <h1>${ricetta.nome_ricetta}</h1>                    
                 `);
             });
             newWindow.document.close();

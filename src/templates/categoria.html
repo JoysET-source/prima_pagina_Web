@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <title>Ricette - {{ categoria }}</title>
-        <meta charset="UTF-8>"
+        <title>Ricette - {{ categoria }}</title>        
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             body{
-            background-image: url("{{ url_for('static', filename='sfondo_carbonara.jpg') }}");
+            background-image: url("{{ url_for('static', filename='sfondi/' + categoria + '_sfondo.jpg') }}");
             background-size: cover;
             background-repeat: no-repeat;
             min-height: 100vh;
@@ -15,7 +15,7 @@
             align-items: center;
             justify-content: center;            
             }
-            .pasta{
+            .categorie{
             color: tomato;
             text-align: center;            
             font-size: 200%;    
@@ -28,7 +28,7 @@
         </style>
     </head>
     <body>
-        <div class="pasta">Ricette della categoria: {{ categoria }}</div>
+        <div class="categorie">Ricette della categoria: {{ categoria }}</div>
         <div>
             {% for ricetta in ricette %}
             <div class="ricette-container">               
@@ -39,6 +39,8 @@
             {% endfor %}
         </div>
         <br>
-        <a href="/">Torna alla pagina principale</a>
+        <!--<a href="/">Torna alla pagina principale</a>-->
+        <a href="/" style="display: block; margin-top: 40px; text-align: center; color: blue; text-decoration: none;"
+        >Torna alla pagina principale</a>
     </body>
 </html>
