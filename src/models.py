@@ -1,3 +1,6 @@
+from flask_login import UserMixin
+from flask_wtf import wtforms
+from wtforms import StringField, PasswordField, SubmitField
 from main import db, app
 
 
@@ -10,7 +13,7 @@ class Ricetta(db.Model):
     lavorazioni = db.Column(db.String, nullable=False)
     # image_url = db.Column(db.String(500), nullable=True)  # Aggiungi questo campo per memorizzare l'URL dell'immagine
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __bind_key__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=True)
