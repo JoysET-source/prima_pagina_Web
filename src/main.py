@@ -5,8 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'  # Sostituisci con il tuo URI del database
+# il seguente comando serve per gestire piu di un db.
+app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+
 db = SQLAlchemy(app)
 
 ricette_path = os.path.join("static", "Ricette")
@@ -39,3 +42,10 @@ def categoria(categoria):
     ricette = load_ricette(categoria)
     return render_template("categoria.html", categoria=categoria, ricette=ricette)
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("register.html")

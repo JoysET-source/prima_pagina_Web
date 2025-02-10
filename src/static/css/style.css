@@ -86,3 +86,20 @@
             color: black;
             cursor: pointer;
             }
+        .loginButton{
+            padding: 8px 18px;
+            font-size: 10px;
+            border-radius: 20px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            }
+         .registerButton{
+            padding: 8px 18px;
+            font-size: 10px;
+            border-radius: 20px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            }
+

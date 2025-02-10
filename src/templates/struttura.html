@@ -9,10 +9,9 @@
     <meta name="keywords" content="kitchen, food, cake, sweety">
     <meta name="description" content="here we made, learn and taste good and healthy food"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <link rel="stylesheet" href="static/css/style.css">
-    
+    <link rel="stylesheet" href="static/css/style.css">    
 </head>
-<body>
+<body>        
     <div class="container">
         <img class="logo" src="static/logo_adesivo_SePoateDeMancat.jpg" alt="logo_Se_Poate_De_Mancat">
         <div class="btn-container">
@@ -29,7 +28,7 @@
             <button class="btn" id="runButton3">Apporto Calorico</button>            
             <button class="btn" id="runButton2">Vuoto</button>                    
         </div>
-    </div>
+    </div> 
     <div class="container1">
         <div class="social-media">
             <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
@@ -43,9 +42,11 @@
             <label for="search-input" class="sr-only">Cerca ricetta</label>
             <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
             <button id="search-button" type="button">Search</button>
-            <button id="elimina-button" type="button">Delete</button>                      
+            <button id="elimina-button" type="button">Delete</button>
+            <a href="{{url_for('login')}}" class="loginButton">Login Page</a>    
+            <a href="{{url_for('register')}}" class="registerButton">Register Page</a>                    
         </div>        
-    </div>
+    </div>    
     <script type="text/javascript" src="static/js/script.js"></script>
 </body>
 </html>
