@@ -7,7 +7,7 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from main import db, app
 
 
-# Definizione del modello Ricetta
+# Creazione della tabella Ricetta
 class Ricetta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome_ricetta = db.Column(db.String(100), unique=True, nullable=False)
@@ -16,6 +16,7 @@ class Ricetta(db.Model):
     # lavorazioni = db.Column(db.String, nullable=False)
     # image_url = db.Column(db.String(500), nullable=True)  # Aggiungi questo campo per memorizzare l'URL dell'immagine
 
+# Creazione della tabella User
 class User(db.Model, UserMixin):
     __bind_key__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -28,11 +29,12 @@ class RegisterForm(FlaskForm):
     password = StringField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Register")
 
+    # assicurarsi che username sia unico
     def validazione_username(self, username):
         user_esistente = User.query.filter_by(username=username.data).first()
         if user_esistente:
             raise ValidationError(
-                "nome utente esiste gia , sceglierne un altro")
+                "nome utente non disponibile, sceglierne un altro")
 
 def password_complexity_check(form, field):
     password = field.data
