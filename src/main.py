@@ -2,9 +2,8 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, login_required
 from dotenv import load_dotenv
-from models import User
+
 
 load_dotenv()
 
@@ -15,14 +14,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'  # Sostituisci co
 app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+# questo serve a flask per gestire le librerie wtf e quindi la sicurezza degli user
 app.secret_key = os.getenv("SECRET_KEY")
-
+# questo e' per criptare la secret key
 bcrypt = Bcrypt(app)
+# questo crea il database
 db = SQLAlchemy(app)
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
 
 ricette_path = os.path.join("static", "Ricette")
 
@@ -54,12 +51,5 @@ def categoria(categoria):
     ricette = load_ricette(categoria)
     return render_template("categoria.html", categoria=categoria, ricette=ricette)
 
-@app.route("/dashboard", methods=["GET", "POST"])
-@login_required
-def dashboard():
-    return render_template("dashboard.html")
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
