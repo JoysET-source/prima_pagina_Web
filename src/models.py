@@ -1,6 +1,8 @@
+import re
+
 from flask_login import UserMixin
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from main import db, app
 
@@ -17,7 +19,7 @@ class Ricetta(db.Model):
 class User(db.Model, UserMixin):
     __bind_key__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, nullable=True)
+    # email = db.Column(db.String, nullable=True)
     username = db.Column(db.String(20), unique=True, nullable=True)
     password = db.Column(db.String(80), nullable=True)
 
@@ -32,11 +34,17 @@ class RegisterForm(FlaskForm):
             raise ValidationError(
                 "nome utente esiste gia , sceglierne un altro")
 
+def password_complexity_check(form, field):
+    password = field.data
+    if not re.search(r"[A-Z]", password):
+        raise ValidationError("La password deve contenere almeno un carattere maiuscolo")
+    if not re.search(r"[!@#$%^&*(),.?':{}|<>]", password):
+        raise ValidationError("La password deve contenere almeno un carattere speciale")
+
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw= {"placeholder": "Username"})
-    password = StringField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
+    password = StringField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw= {"placeholder": "Password"})
     submit = SubmitField("Login")
-
 
 # Creare il database
 with app.app_context():
