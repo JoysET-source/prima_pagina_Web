@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
-from main import db, app
+from import_bridge import db
 
 
 # Creazione della tabella Ricetta
@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     # email = db.Column(db.String, nullable=True)
     username = db.Column(db.String(20), unique=True, nullable=True)
-    password = db.Column(db.String(80), nullable=True)
+    password = db.Column(db.String(255), nullable=True)
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw= {"placeholder": "Username"})
@@ -48,9 +48,7 @@ class LoginForm(FlaskForm):
     password = StringField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw= {"placeholder": "Password"})
     submit = SubmitField("Login")
 
-# Creare il database
-with app.app_context():
-    db.create_all()
+
 
 
 

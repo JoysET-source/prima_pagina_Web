@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login page</h1>
-    <form method="POST" action="">
-        {{form.hidden_tag()}}
-        {{form.username}}
-        {{form.password}}
-        {{form.submit}}
-    </form>
-    <a href="{{url_for('register')}}" class="loginButton">non sei registrato? crea un account</a>
-</body>
-</html>
+{% extends "font_login.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block form_title %}Login Here{% endblock %}
+
+{% block form_content %}
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="Email or Phone" id="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password" id="password">
+
+    <p>Non hai un account? <a href="{{ url_for('register') }}">Registrati qui</a></p><br><br>
+    <a href="/">Torna alla pagina principale</a>
+
+    <button>Log In</button>
+    <div class="social">
+      <div class="go"><i class="fab fa-google"></i>  Google</div>
+      <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    </div>
+{% endblock %}
+
+{% block button_text %}Log In{% endblock %}
