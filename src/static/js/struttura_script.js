@@ -1,42 +1,10 @@
-document.getElementById("runButton0").onclick = function() {
+        document.getElementById("runButton0").onclick = function() {
             fetch("/run_script")
             .then(response => response.text())
             .then(data => {alert("si giusto")
             });
         };
 
-
-        document.getElementById("runButton").onclick = function() {
-            const ricettaData = {
-                nome_ricetta: "per test4",  // Puoi cambiare questi valori con quelli che desideri inviare
-                ingredienti: "pasta fatta in casa, zucca, burro, salvia",
-                kcal: 230
-            };
-
-            fetch("/scrivi_ricetta", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(ricettaData)  // Invia i dati in formato JSON
-                })
-                .then(response => response.json())  // Assicurati di parsare la risposta come JSON
-                .then(data => {
-                    const newWindow = window.open();
-                    if (data.detail){
-                        newWindow.document.write(`<h1 style="text-align: center";>${data.detail}</h1>`);
-                    }
-                    else{
-                        newWindow.document.write(`
-                        <h1>${data.nome_ricetta}</h1>
-                        <p>Ingredienti: ${data.ingredienti}</p>
-                        <p>Calorie: ${data.kcal}</p>`);
-                    }
-
-                    newWindow.document.close();
-                })
-                .catch(error => console.error('Error:', error));
-        };
 
         document.getElementById("runButton1").onclick = function(){
             fetch("/elenco_ricette") // Effettua la richiesta GET all'endpoint
