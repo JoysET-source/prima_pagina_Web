@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from models import Ricetta, User, LoginForm, RegisterForm
 from import_bridge import db, bcrypt, login_manager
 
+
 load_dotenv()
 
 app = Flask(__name__) # engine flask app.py
@@ -72,6 +73,7 @@ def categoria(categoria):
 def dettaglio_ricetta(categoria, nome_ricetta):
     image = request.args.get("image")  # Recupera il parametro dell'immagine
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+    # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta, image=image)
 
 @app.route("/dashboard", methods=["GET", "POST"])

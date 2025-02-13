@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dettaglio ricetta</title>
+    <title>Dettaglio Ricetta</title>
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body{
-        background-image: url("{{ url_for('static', filename=image) }}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;            
+    <style>       
+        /* Sezione destra (Immagine fissa) */
+        .right-section {
+            width: 30%;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+        .right-section img {            
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
     </style>
+
+
 </head>
 <body>
+    <div class="left-section"></div>
+    <div class="right-section">
+        <img src="{{ url_for('static', filename=image) }}">
+    </div>
     
 </body>
 </html>
