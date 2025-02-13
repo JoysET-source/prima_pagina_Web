@@ -68,10 +68,11 @@ def categoria(categoria):
     ricette = load_ricette(categoria)
     return render_template("categoria.html", categoria=categoria, ricette=ricette)
 
-@app.route("/ricetta/<nome_ricetta>")
-def dettaglio_ricetta(nome_ricetta):
+@app.route("/ricette/<categoria>/<nome_ricetta>")
+def dettaglio_ricetta(categoria, nome_ricetta):
+    image = request.args.get("image")  # Recupera il parametro dell'immagine
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
-    return render_template("dettaglio_ricetta.html", ricetta=ricetta)
+    return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta, image=image)
 
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required

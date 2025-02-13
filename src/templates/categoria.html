@@ -59,8 +59,8 @@ Padding e bordo rimossi dai bottoni-->
         </div>
         <div>
             {% for ricetta in ricette %}
-            <div class="ricette-container">    
-                <a href="{{ url_for('dettaglio_ricetta', nome_ricetta=ricetta['nome_ricetta']) }}">      
+            <div class="ricette-container">                  
+                <a href="{{ url_for('dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta['description'], image=ricetta['image']) }}">    
                 <button>
                     <img src="{{ url_for('static', filename=ricetta['image']) }}"
                     alt="{{ ricetta['nome_ricetta'] }}" width="200">
