@@ -1,3 +1,11 @@
+<!--categoria fa la pagina di ogni tasto categoria
+foto di sfondo personalizzata
+Bottoni senza margini intorno alle immagini
+Immagini allineate orizzontalmente, andando a capo se necessario
+Il cursore diventa una manina quando si passa sopra
+Padding e bordo rimossi dai bottoni-->
+
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -15,26 +23,49 @@
             align-items: center;
             justify-content: center;            
             }
-            .categorie{
-            color: tomato;
+            .categorie{            
             text-align: center;            
-            font-size: 200%;    
-            } 
+            font-size: 200%; 
+            }
+            mark{
+            background-color: blue;
+            color: tomato;
+            border-radius: 10px;
+            }
             .ricette-container{
-            margin: 20px;
-            text-align: left;
+            display: flex;
+            flex-wrap: wrap; /* Permette di andare a capo quando lo spazio finisce */
+            gap: 10px; /* Spazio tra le immagini */
+            justify-content: center; /* Centra le immagini nella pagina */
+            padding: 0;           
             } 
+            .ricette-container button {
+            background: none;
+            border: none;
+            padding: 0; /* margine interno */
+            cursor: pointer; /* Cambia il cursore in manina */
+            }
+            .ricette-container img {
+            width: 200px; /* Larghezza immagini */
+            height: auto;
+            display: block; /* Evita spazi indesiderati */
+            }
             
         </style>
     </head>
     <body>
-        <div class="categorie">Ricette della categoria: {{ categoria }}</div>
+        <div class="categorie">
+            <mark>Ricette della categoria: {{ categoria }}</mark>
+        </div>
         <div>
             {% for ricetta in ricette %}
-            <div class="ricette-container">               
-                <img src="{{ url_for('static', filename=ricetta['image']) }}"
-                alt="{{ ricetta['image'].split('/')[-1].replace('.jpg', '').replace('_', ' ') }}" width="200">        
-                <p>{{ ricetta['description'] }}</p>
+            <div class="ricette-container">    
+                <a href="{{ url_for('dettaglio_ricetta', nome_ricetta=ricetta['nome_ricetta']) }}">      
+                <button>
+                    <img src="{{ url_for('static', filename=ricetta['image']) }}"
+                    alt="{{ ricetta['nome_ricetta'] }}" width="200">
+                </button>   
+                </a>              
             </div>
             {% endfor %}
         </div>
@@ -44,3 +75,7 @@
         >Torna alla pagina principale</a>
     </body>
 </html>
+
+
+    
+   
