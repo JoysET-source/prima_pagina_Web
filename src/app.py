@@ -76,10 +76,35 @@ def dettaglio_ricetta(categoria, nome_ricetta):
     # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta, image=image)
 
-@app.route("/dashboard", methods=["GET", "POST"])
-@login_required
+@app.route("/dettaglio_ricette_test/<id>")
+def dettaglio_ricette_test(id):
+    ricetta = Ricetta.query.filter_by(id=id).first()
+    # passa i parametri specificati a dettaglio_ricetta.html
+    return render_template("dettaglio_ricetta_test.html", ricetta=ricetta)
+
+@app.route("/dettaglio_ricette_nome_ricetta/<nome_ricetta>")
+def dettaglio_ricette_nome_ricetta(nome_ricetta):
+    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+    # passa i parametri specificati a dettaglio_ricetta.html
+    return render_template("dettaglio_ricetta_test.html", ricetta=ricetta)
+
+@app.route("/test_inserimento")
+def test_inserimento():
+    return render_template("test/test_inserimento.html")
+
+
+@app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard/index.html")
+
+@app.route("/dashboard/add_ricette")
+def add_ricette():
+    return render_template("dashboard/add_ricette.html")
+
+# @app.route("/dashboard", methods=["GET", "POST"])
+# @login_required
+# def dashboard():
+#     return render_template("dashboard.html")
 
 @login_manager.user_loader
 def load_user(user_id):
