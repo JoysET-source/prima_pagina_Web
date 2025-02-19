@@ -1,0 +1,54 @@
+{% include 'dashboard/header.html' %}
+
+
+<div class="card card-primary">
+
+    <!--    <div class="row">-->
+    <!--        <div class="col-lg-6">-->
+    <div class="card-header">
+        <h3 class="card-title">Quick Example</h3>
+    </div>
+    <form>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Titolo">Titolo</label>
+                        <input type="text" class="form-control" id="Titolo" placeholder="Titolo">
+                    </div>
+                    <div class="form-group">
+                        <label for="descrizione">descrizione</label>
+                        <input type="text" class="form-control" id="descrizione" placeholder="descrizione">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="kcal">kcal</label>
+                        <input type="text" class="form-control" id="kcal" placeholder="kcal">
+                    </div>
+                    <div class="form-group">
+                        <label for="tempo">tempo</label>
+                        <input type="text" class="form-control" id="tempo" placeholder="tempo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div id="summernote">Ingredienti</div>
+            </div>
+
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Inserisci</button>
+        </div>
+    </form>
+    <!--        </div>-->
+    <!--    </div>-->
+
+</div>
+
+{% include 'dashboard/footer.html' %}

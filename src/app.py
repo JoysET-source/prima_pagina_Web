@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from models import Ricetta, User, LoginForm, RegisterForm
 from import_bridge import db, bcrypt, login_manager
 
+
 load_dotenv()
 
 app = Flask(__name__) # engine flask app.py
@@ -74,12 +75,6 @@ def dettaglio_ricetta(categoria, nome_ricetta):
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
     # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta, image=image)
-
-# @app.route("/dettaglio_ricetta/<int:id>")
-# def dettaglio_ricetta(id):
-#     ricetta = Ricetta.query.get(id)  # Ottimizzato per ID
-#     return render_template("dettaglio_ricetta.html", ricetta=ricetta)
-
 
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
@@ -151,23 +146,15 @@ def register():
 
         db.session.add(new_user)
         db.session.commit()
-
         return redirect(url_for("login"))
 
     return render_template("register.html", form=form)
-
 
 @app.route("/logout", methods=["GET", "POST"])
 @login_required
 def logout():
     logout_user()
     redirect(url_for("login"))
-
-@app.route("/utenti")
-def lista_utenti():
-    users = User.query.all()
-    utenti = [{"id": user.id, "username": user.username} for user in users]
-    return jsonify(utenti)
 
 
 if __name__ == '__main__':
