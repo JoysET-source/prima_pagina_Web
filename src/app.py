@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from models import Ricetta, User, LoginForm, RegisterForm
 from import_bridge import db, bcrypt, login_manager
 
-
 load_dotenv()
 
 app = Flask(__name__) # engine flask app.py
