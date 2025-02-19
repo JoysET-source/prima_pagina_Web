@@ -1,16 +1,22 @@
+<!--questo serve per commentare in css come """""" in python e come /**/ in JavaScript , per commentare solo una riga in css uguale
+    in python # in JavaScript //-->    
+
 <!DOCTYPE html>
 <html lang="en">
-<head><!--questo serve per commentare in css come """""" in python e come /**/ in JavaScript , per commentare solo una riga in css uguale
-    in python # in JavaScript //-->    
-    <title>Se Poate De Mancat</title>
+    <!-- inizializziamo la pagina html -->
+<head>
+    <title>Se Poate De Mancat</title> <!-- titolo della pagina html -->
+    <!-- questa che segue e'una libreria CDN che serve per aggiungere icone senza scaricare niente localmente
+     nel nostro caso icone di instagram e facebook -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="30">
-    <meta name="keywords" content="kitchen, food, cake, sweety">
-    <meta name="description" content="here we made, learn and taste good and healthy food"
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <link rel="stylesheet" href="static/css/struttura_style.css">    
+    <meta charset="UTF-8"><!-- codifica i caratteri come accenti o caratteri speciali -->
+    <meta http-equiv="refresh" content="30"><!-- refresh auto pagina 30 secondi -->
+    <meta name="keywords" content="kitchen, food, cake, sweety"> <!-- caratteri di ricerca -->
+    <meta name="description" content="here we made, learn and taste good and healthy food"> <!-- cosa fa il sito -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- dovrebbe adattare le immagini per diverse grandezze schermo -->
+    <link rel="stylesheet" href="static/css/struttura_style.css">  <!-- collegamento con struttura_style -->  
 </head>
+<!-- definizione dei pulsanti della pagina principale -->
 <body>        
     <div class="container">
         <img class="logo" src="static/logo_adesivo_SePoateDeMancat.jpg" alt="logo_Se_Poate_De_Mancat">
@@ -29,6 +35,7 @@
             <button class="btn" id="runButton2">Vuoto</button>                    
         </div>
     </div> 
+  <!-- definizione delle icone insta e fb -->
     <div class="container1">
         <div class="social-media">
             <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
@@ -38,6 +45,8 @@
                 <i class="fab fa-facebook"></i>
             </a>
         </div>
+<!-- definizione della barra di ricerca e dei pulsanti cerca ed elimina -->
+
         <div class="search-container">
             <label for="search-input" class="sr-only">Cerca ricetta</label>
             <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
@@ -47,6 +56,7 @@
             <a href="{{url_for('register')}}" class="registerButton">Register</a>                    
         </div>        
     </div>    
+<!-- collegamento con gli script funzionali  -->
     <script type="text/javascript" src="static/js/struttura_script.js"></script>
 </body>
 </html>

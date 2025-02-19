@@ -28,6 +28,9 @@
         /* Sezione destra con elenco puntato */
         .top-section-right {
             width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .top-section-right ul {
@@ -76,11 +79,23 @@
         .back-home:hover {
             background-color: #cc5500;
         }
+        table, td, th{            
+            border-radius:25px;
+            display: flex;            
+        }
+        table{
+            border-spacing: 30px;
+            text-align: right;
+        }
+        td, th{
+            padding: 15px;
+            text-align: left;
+        }
 
     </style>
 </head>
 <body>
-
+    
     <!-- Sezione superiore -->
     <div class="container-top">  
         <div class="top-section-left">
@@ -88,15 +103,27 @@
         </div>
         <div class="top-section-right">
             <ul>
-                <li>Ricetta: Lasagna</li>
-                <li>Strumenti: casseruola, mestolo, forno</li>
-                <li>Ingredienti: pasta per lasagne, ragù, besciamella</li>
-                <li>Passaggi: 5 step</li>
+                <li>Ricetta: </li>
+                <li>Strumenti: </li>
+                <li>Ingredienti: </li>   
+                <li>Kcal: </li>            
                 <li>Tempo di preparazione: 1h</li>
                 <li>Difficoltà: Media</li>
             </ul>
         </div>
     </div>
+
+    <table>
+        
+        <tr>
+            <th><h1 style="color: #ff6600;">Ingredienti</h1></th>
+            <th>Recipes</th>
+            <th>Tools</th>
+            <th>Ingredients</th>
+            <th>Steps</th>
+            <th>Time</th>
+        </tr>
+    </table>
 
     <!-- Sezione descrizione passo passo -->
     <div class="next-section">

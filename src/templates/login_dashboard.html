@@ -1,0 +1,29 @@
+<!-- Qui puoi aggiungere altre informazioni personalizzate
+ 
+per esempio potrebbe essere una pagina in cui l'utente autenticato può visualizzare informazioni personalizzate
+
+l` accesso qui e'solo se fai il login
+
+ @app.route("/dashboard", methods=["GET", "POST"])
+@login_required
+def dashboard():
+    # Puoi accedere a informazioni sull'utente loggato tramite `current_user`
+    return render_template("dashboard.html", username=current_user.username)
+
+<h1>Benvenuto, {{ username }}!</h1>
+
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+</head>
+<body>
+    <h1>hello you are logged in</h1>
+    <a href="{{url_for('logout')}}">Logout</a>
+</body>
+</html>

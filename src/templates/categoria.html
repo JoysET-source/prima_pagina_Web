@@ -1,10 +1,4 @@
-<!--categoria fa la pagina di ogni tasto categoria
-foto di sfondo personalizzata
-Bottoni senza margini intorno alle immagini
-Immagini allineate orizzontalmente, andando a capo se necessario
-Il cursore diventa una manina quando si passa sopra
-Padding e bordo rimossi dai bottoni-->
-
+<!--categoria fa la pagina di ogni tasto categoria con foto di sfondo personalizzata-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -12,55 +6,26 @@ Padding e bordo rimossi dai bottoni-->
         <title>Ricette - {{ categoria }}</title>        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body{
-            background-image: url("{{ url_for('static', filename='sfondi/' + categoria + '_sfondo.jpg') }}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;            
-            }
-            .categorie{            
-            text-align: center;            
-            font-size: 200%; 
-            }
-            mark{
-            background-color: blue;
-            color: tomato;
-            border-radius: 10px;
-            }
-            .ricette-container{
-            display: flex;
-            flex-wrap: wrap; /* Permette di andare a capo quando lo spazio finisce */
-            gap: 10px; /* Spazio tra le immagini */
-            justify-content: center; /* Centra le immagini nella pagina */
-            padding: 0;           
-            } 
-            .ricette-container button {
-            background: none;
-            border: none;
-            padding: 0; /* margine interno */
-            cursor: pointer; /* Cambia il cursore in manina */
-            }
-            .ricette-container img {
-            width: 200px; /* Larghezza immagini */
-            height: auto;
-            display: block; /* Evita spazi indesiderati */
-            }
-            
-        </style>
+        <link rel="stylesheet" href="../static/css/categoria_style.css">        
     </head>
-    <body>
+    <!-- il background lo mettiamo qui in questo caso perche css e'solo statico e non analizza jinja -->
+    <style>
+        .background {
+            background-image: url("{{ url_for('static', filename='sfondi/' + categoria + '_sfondo.jpg') }}");
+        }
+    </style>
+    <!-- con jinja creiamo il ciclo per iterare tutte le ricette inserite e mostrarle con la loro immagine personale e info -->
+    <body>  
+        <div class="background">  
         <div class="categorie">
             <mark>Ricette della categoria: {{ categoria }}</mark>
         </div>
+        <br><br><br>
         <div>
             {% for ricetta in ricette %}
             <div class="ricette-container">                  
-                <a href="{{ url_for('dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta['description'], image=ricetta['image']) }}">    
+                <a href="{{ url_for('dettaglio_ricetta', categoria=categoria, 
+                nome_ricetta=ricetta['description'], image=ricetta['image']) }}">                 
                 <button>
                     <img src="{{ url_for('static', filename=ricetta['image']) }}"
                     alt="{{ ricetta['nome_ricetta'] }}" width="200">
@@ -68,12 +33,11 @@ Padding e bordo rimossi dai bottoni-->
                 </a>              
             </div>
             {% endfor %}
-        </div>
-        <br>
-        <!--<a href="/">Torna alla pagina principale</a>-->
-        <a href="/" style="display: block; margin-top: 40px; text-align: center; color: blue; text-decoration: none;"
-        >Torna alla pagina principale</a>
-    </body>
+        </div>        
+                
+        <a class="back-home" href="/">Torna alla pagina principale</a>
+    </div>
+    </body>    
 </html>
 
 

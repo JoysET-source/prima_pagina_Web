@@ -1,0 +1,54 @@
+.background {    
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+            .categorie{            
+            text-align: center;            
+            font-size: 200%; 
+            }
+            mark{
+            background-color: blue;
+            color: tomato;
+            border-radius: 10px;
+            }
+            .ricette-container{
+            display: flex;
+            flex-wrap: wrap; /* Permette di andare a capo quando lo spazio finisce */
+            gap: 10px; /* Spazio tra le immagini */
+            justify-content: center; /* Centra le immagini nella pagina */
+            padding: 0;           
+            } 
+            .ricette-container button {
+            background: none;
+            border: none;
+            padding: 0; /* margine interno */
+            cursor: pointer; /* Cambia il cursore in manina */
+            }
+            .ricette-container img {
+            width: 200px; /* Larghezza immagini */
+            height: auto;
+            display: block; /* Evita spazi indesiderati */
+            }
+        
+            .back-home {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            }
+            .back-home:hover {
+            background-color: #cc5500;
+            }
+      
